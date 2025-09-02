@@ -1,0 +1,64 @@
+@startuml asteroids
+
+
+class Juego {
+    - marcador : int
+    - puntaje : int
+    - vidas : int
+    --
+    + iniciar()
+    + terminar()
+}
+
+class Jugador {
+    + nombre : String
+    + controlarNave()
+}
+
+class Nave {
+    - velocidad : float
+    - rotacion : float
+    - aceleracion : float
+    --
+    + mover()
+    + rotar()
+    + disparar()
+    + teletransportar()
+}
+
+class Asteroide {
+    - tamaño : int
+    --
+    + dividir()
+    + destruir()
+}
+
+class Fragmento {
+}
+
+class Proyectil {
+    + disparar()
+}
+
+class OVNI {
+    - dificultad : int
+    --
+    + atacar()
+}
+
+class Explosion {
+}
+
+
+
+' Relaciones
+Juego "1" -- "1" Jugador
+Jugador "1" -- "1" Nave
+Nave "1" -- "*" Proyectil
+Nave "1" -- "0..1" Explosion
+Asteroide "1" -- "*" Fragmento
+Asteroide "1" -- "0..1" Explosion
+Juego "1" -- "*" Asteroide
+Juego "1" -- "*" OVNI
+
+@enduml
